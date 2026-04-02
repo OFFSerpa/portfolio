@@ -1,43 +1,61 @@
-# Astro Starter Kit: Minimal
+# Portfólio — Vinicius Serpa
 
-```sh
-npm create astro@latest -- --template minimal
+Site de portfólio pessoal construído com Astro v6 e Tailwind CSS v4.
+
+## Stack
+
+- **Framework:** [Astro v6](https://astro.build)
+- **Estilização:** Tailwind CSS v4 (via `@tailwindcss/vite`)
+- **Conteúdo:** Astro Content Collections com arquivos Markdown
+
+## Estrutura do projeto
+
+```
+src/
+├── content.config.ts          # Schema das coleções
+├── content/projetos/          # Arquivos .md de cada projeto
+├── layouts/
+│   └── Layout.astro           # Layout base
+├── components/
+│   ├── Header.astro
+│   ├── Footer.astro
+│   └── ProjectCard.astro
+├── pages/
+│   ├── index.astro            # Página inicial
+│   └── projetos/[slug].astro  # Página individual de projeto
+└── styles/
+    └── global.css             # Tema Tailwind (paleta + fontes)
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Rodando localmente
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+npm install
+npm run dev        # http://localhost:4321
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Outros comandos
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+| Comando           | Ação                                      |
+| :---------------- | :---------------------------------------- |
+| `npm run build`   | Gera o site estático em `./dist/`         |
+| `npm run preview` | Visualiza o build antes de fazer o deploy |
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Adicionando projetos
 
-## 🧞 Commands
+Crie um arquivo `.md` em `src/content/projetos/` seguindo o schema:
 
-All commands are run from the root of the project, from a terminal:
+```yaml
+---
+titulo: "Nome do Projeto"
+descricao: "Descrição curta exibida no card."
+stack: ["Swift", "SwiftUI"]
+repositorio: "https://github.com/OFFSerpa/repo"  # opcional
+data: 2025-01-01
+destaque: false
+---
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Conteúdo completo do projeto em Markdown...
+```
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+O projeto aparece automaticamente no grid da página inicial e ganha uma página própria em `/projetos/nome-do-arquivo`.
