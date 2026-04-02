@@ -1,0 +1,113 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const projetos = await getCollection('projetos');
+const projetosOrdenados = projetos.sort(
+  (a, b) => b.data.data.getTime() - a.data.data.getTime()
+);
+---
+
+<Layout title="Home">
+  <!-- Hero -->
+  <section class="max-w-4xl mx-auto px-6 pt-24 pb-20">
+    <p class="text-sm font-mono mb-4" style="color: var(--color-accent);">
+      olá, eu sou
+    </p>
+    <h1 class="text-4xl sm:text-5xl font-semibold tracking-tight leading-tight mb-6" style="color: var(--color-text-primary);">
+      Vinicius Serpa
+    </h1>
+    <p class="text-lg leading-relaxed max-w-xl" style="color: var(--color-text-secondary);">
+      Desenvolvedor iOS com 3 anos de experiência em apps bancários de produção.
+      Atualmente no BTG Pactual. Estudante de Ciência da Computação na Mackenzie.
+    </p>
+
+    <div class="flex flex-wrap gap-3 mt-8">
+      <a
+        href="#projetos"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors"
+        style="background-color: var(--color-accent); color: #0a0a0a;"
+        onmouseover="this.style.backgroundColor='var(--color-accent-hover)'"
+        onmouseout="this.style.backgroundColor='var(--color-accent)'"
+      >
+        Ver projetos
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+      </a>
+      <a
+        href="https://github.com/OFFSerpa"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium border transition-colors"
+        style="border-color: var(--color-border); color: var(--color-text-secondary);"
+        onmouseover="this.style.borderColor='var(--color-text-muted)'; this.style.color='var(--color-text-primary)'"
+        onmouseout="this.style.borderColor='var(--color-border)'; this.style.color='var(--color-text-secondary)'"
+      >
+        GitHub
+      </a>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="max-w-4xl mx-auto px-6">
+    <hr style="border-color: var(--color-border);" />
+  </div>
+
+  <!-- Projetos -->
+  <section id="projetos" class="max-w-4xl mx-auto px-6 py-20">
+    <h2 class="text-xs font-mono uppercase tracking-widest mb-10" style="color: var(--color-text-muted);">
+      Projetos
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {projetosOrdenados.map((projeto) => (
+        <ProjectCard
+          titulo={projeto.data.titulo}
+          descricao={projeto.data.descricao}
+          stack={projeto.data.stack}
+          slug={projeto.id}
+          destaque={projeto.data.destaque}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- Sobre -->
+  <section id="sobre" class="max-w-4xl mx-auto px-6 pb-20">
+    <hr class="mb-20" style="border-color: var(--color-border);" />
+    <h2 class="text-xs font-mono uppercase tracking-widest mb-10" style="color: var(--color-text-muted);">
+      Sobre
+    </h2>
+
+    <div class="max-w-xl space-y-4">
+      <p class="text-base leading-relaxed" style="color: var(--color-text-secondary);">
+        iOS Developer alocado no BTG Pactual via Beyond Soluções, onde entrego features de core banking
+        com Swift e UIKit, integro APIs de networking e atuo na resolução de incidentes em produção com
+        Datadog e Firebase.
+      </p>
+      <p class="text-base leading-relaxed" style="color: var(--color-text-secondary);">
+        Passei pela Apple Developer Academy no Mackenzie, onde publiquei 5 apps na App Store com mais de
+        10k impressões e desenvolvi com CoreML e VisionKit. Tenho experiência com Kotlin Multiplatform
+        para compartilhar lógica de negócio entre iOS e Android, e interesse em levar essa visão
+        cross-platform para Flutter.
+      </p>
+      <p class="text-base leading-relaxed" style="color: var(--color-text-secondary);">
+        Fora do trabalho, exploro automação com Python e experimentos com LLMs.
+        Concluo o Bacharelado em Ciência da Computação na Mackenzie em Jun 2026.
+      </p>
+
+      <div class="pt-4 flex flex-wrap gap-2">
+        {['Swift', 'UIKit', 'SwiftUI', 'Kotlin', 'KMP', 'Flutter', 'Python', 'CoreML'].map((tech) => (
+          <span
+            class="text-xs font-mono px-2 py-1 rounded border"
+            style="color: var(--color-text-muted); border-color: var(--color-border); background-color: var(--color-surface);"
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

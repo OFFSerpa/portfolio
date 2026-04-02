@@ -1,0 +1,31 @@
+---
+const year = new Date().getFullYear();
+
+const links = [
+  { label: 'GitHub', href: 'https://github.com/OFFSerpa' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/viniciusspansan' },
+];
+---
+
+<footer class="border-t mt-24" style="border-color: var(--color-border);">
+  <div class="max-w-4xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="text-sm font-mono" style="color: var(--color-text-muted);">
+      © {year} Vinicius Serpa
+    </p>
+    <div class="flex items-center gap-5">
+      {links.map(({ label, href }) => (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm transition-colors"
+          style="color: var(--color-text-muted);"
+          onmouseover="this.style.color='var(--color-accent)'"
+          onmouseout="this.style.color='var(--color-text-muted)'"
+        >
+          {label}
+        </a>
+      ))}
+    </div>
+  </div>
+</footer>

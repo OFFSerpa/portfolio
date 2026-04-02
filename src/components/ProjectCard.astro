@@ -1,0 +1,48 @@
+---
+interface Props {
+  titulo: string;
+  descricao: string;
+  stack: string[];
+  slug: string;
+  destaque?: boolean;
+}
+
+const { titulo, descricao, stack, slug, destaque = false } = Astro.props;
+---
+
+<a
+  href={`/projetos/${slug}`}
+  class="group block rounded-lg border p-6 transition-all duration-200"
+  style="border-color: var(--color-border); background-color: var(--color-surface);"
+  onmouseover="this.style.borderColor='var(--color-accent)'; this.style.backgroundColor='var(--color-surface-2)';"
+  onmouseout="this.style.borderColor='var(--color-border)'; this.style.backgroundColor='var(--color-surface)';"
+>
+  <div class="flex items-start justify-between gap-4 mb-3">
+    <h3 class="font-medium text-base leading-snug transition-colors" style="color: var(--color-text-primary);">
+      {titulo}
+    </h3>
+    {destaque && (
+      <span
+        class="shrink-0 text-xs font-mono px-2 py-0.5 rounded-full border"
+        style="color: var(--color-accent); border-color: color-mix(in srgb, var(--color-accent) 30%, transparent); background-color: color-mix(in srgb, var(--color-accent) 8%, transparent);"
+      >
+        destaque
+      </span>
+    )}
+  </div>
+
+  <p class="text-sm leading-relaxed mb-4" style="color: var(--color-text-secondary);">
+    {descricao}
+  </p>
+
+  <div class="flex flex-wrap gap-2">
+    {stack.map((tech) => (
+      <span
+        class="text-xs font-mono px-2 py-0.5 rounded"
+        style="color: var(--color-text-muted); background-color: var(--color-surface-2);"
+      >
+        {tech}
+      </span>
+    ))}
+  </div>
+</a>

@@ -1,0 +1,37 @@
+---
+const navLinks = [
+  { label: 'Projetos', href: '/#projetos' },
+  { label: 'Sobre', href: '/#sobre' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header
+  class="sticky top-0 z-50 border-b"
+  style="background-color: color-mix(in srgb, var(--color-bg) 80%, transparent); backdrop-filter: blur(12px); border-color: var(--color-border);"
+>
+  <div class="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
+    <a
+      href="/"
+      class="font-mono font-medium text-sm tracking-tight transition-colors"
+      style="color: var(--color-text-primary);"
+    >
+      vs<span style="color: var(--color-accent);">.</span>
+    </a>
+
+    <nav class="flex items-center gap-6">
+      {navLinks.map(({ label, href }) => (
+        <a
+          href={href}
+          class="text-sm transition-colors"
+          style={`color: ${currentPath === href ? 'var(--color-accent)' : 'var(--color-text-secondary)'}; --hover-color: var(--color-text-primary);`}
+          onmouseover="this.style.color='var(--color-text-primary)'"
+          onmouseout={`this.style.color='${currentPath === href ? 'var(--color-accent)' : 'var(--color-text-secondary)'}'`}
+        >
+          {label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
